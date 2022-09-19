@@ -1,14 +1,23 @@
+@import '../../../layout/breakpoints.scss';
+
 .header {
 	position: relative;
-	height: 40px;
+	height: 10vh;
 	padding: 5px;
 	min-width: 305px;
 
 	.menu {
+		@include sm {
+			margin-bottom: 40px;
+		}
 		a {
 			text-decoration: none;
-			position: absolute;
-			left: 10px;
+			float: left;
+			padding: 10px;
+
+			@include sm {
+				float: none;
+			}
 		}
 
 		ul {
@@ -17,11 +26,18 @@
 
 		ul li {
 			display: inline;
+			@include sm {
+				display: flex;
+				float: none;
+			}
 		}
 
 		.section {
-			position: absolute;
-			right: 10px;
+			float: right;
+
+			@include sm {
+				float: none;
+			}
 		}
 	}
-	}
+}

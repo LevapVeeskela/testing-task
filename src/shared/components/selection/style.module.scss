@@ -1,9 +1,9 @@
 @import '../../../layout/variables.scss';
+@import '../../../layout/mixins.scss';
 
 .select {
 	padding: 5px;
 	text-align: center;
 	border: $border;
-	border-radius: $border-radius;
-	font-size: $font-size;
+	@include input-default
 }

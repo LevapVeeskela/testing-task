@@ -2,7 +2,9 @@
 	"translation": {
 		"HEADER": {
 			"REPOSITORY": "Repository", 
-			"REPOSITORY_TITLE": "Link of repository on github" 
+			"REPOSITORY_TITLE": "Link of repository on github",
+			"SPECIFICATION": "Specification",
+			"SPECIFICATION_TITLE": "Link of specification on github"
 		},
 		"SELECTION": {
 			"DEFAULT": "Choose one..."

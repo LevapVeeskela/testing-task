@@ -1,6 +1,7 @@
 @import '../../../layout/colors.scss';
 @import '../../../layout/breakpoints.scss';
 @import '../../../layout/variables.scss';
+@import '../../../layout/mixins.scss';
 
 .label {
 	font-weight: $font-weight;
@@ -16,8 +17,7 @@
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
-	border: $border;
-	border-radius: $border-radius;
+	@include input-default
 }
 
 .invalid {

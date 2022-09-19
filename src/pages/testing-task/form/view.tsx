@@ -2,10 +2,11 @@ import React, { FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Input from '../../../shared/components/input';
-import { Field, FormCustom } from './interface';
+import { Field, FormCustom } from '../../../core/models/form';
 import style from './style.module.scss';
+import { observer } from 'mobx-react-lite';
 
-const View: FC<FormCustom> = (props) => {
+const View: FC<FormCustom> = observer((props) => {
 	const { fields } = props;
 	const { t } = useTranslation();
 	const formRef = useRef(null);
@@ -41,6 +42,6 @@ const View: FC<FormCustom> = (props) => {
 	) : (
 		t('FORM.ERRORS.SECOND_NAME.LABEL')
 	);
-};
+});
 
 export default View;

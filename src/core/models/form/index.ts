@@ -5,6 +5,10 @@ export interface Field {
 	required?: boolean;
 	pattern?: string;
 }
+export interface FieldValue {
+	name: string;
+	value: string | number | ReadonlyArray<string> | undefined;
+}
 
 export interface FormCustom {
 	fields?: Field[];

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Option } from '../selection/interface';
 import { resources } from '../../../core/i18n';
 import Selection from '../selection';
-import { REPOSITORY } from '../../../core/constants';
+import { REPOSITORY, SPECIFICATION } from '../../../core/constants';
 
 const View: FC = (): JSX.Element => {
 	const { i18n, t } = useTranslation();
@@ -21,9 +21,11 @@ const View: FC = (): JSX.Element => {
 
 	return (
 		<header className={cx(style['header'])}>
-			<div className={cx(style.menu)}>
+			<div className={cx(style['menu'])}>
 				<ul>
 					<li><a target='_blank' rel="noopener noreferrer" href={REPOSITORY} title={t('HEADER.REPOSITORY_TITLE')} > {t('HEADER.REPOSITORY')}</a>
+					</li>
+					<li><a target='_blank' rel="noopener noreferrer" href={SPECIFICATION} title={t('HEADER.SPECIFICATION_TITLE')} > {t('HEADER.SPECIFICATION')}</a>
 					</li>
 					<li className={cx(style.section)}>
 						<Selection options={languages} cb={changeLanguageHandler} />

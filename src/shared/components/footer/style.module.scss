@@ -1,0 +1,20 @@
+.footer {
+	display: flex;
+	justify-content: space-around;
+	height: 8vh;
+
+	.menu {
+		a {
+			text-decoration: none;
+			margin: 10px;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		ul li {
+			display: inline;
+		}
+	}
+}
