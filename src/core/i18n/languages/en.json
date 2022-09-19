@@ -1,0 +1,19 @@
+{
+	"translation": {
+		"FORM": {
+			"FIELDS": {
+				"FIRST_NAME": {
+					"LABEL": "First name",
+					"PLACEHOLDER": "Enter first name, please..."
+				},
+				"SECOND_NAME": {
+					"LABEL": "Second name",
+					"PLACEHOLDER": "Enter second name, please..."
+				}
+			},
+			"BUTTONS": {
+				"READY": "Ready"
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"translation": {
+		"FORM": {
+			"FIELDS": {
+				"FIRST_NAME": {
+					"LABEL": "Имя",
+					"PLACEHOLDER": "Пожалуйста, введите имя..."
+				},
+				"SECOND_NAME": {
+					"LABEL": "Фамилия",
+					"PLACEHOLDER": "Пожалуйста, введите фамилию..."
+				}
+			},
+			"BUTTONS": {
+				"READY": "Готово"
+			}
+		}
+	}
+}
