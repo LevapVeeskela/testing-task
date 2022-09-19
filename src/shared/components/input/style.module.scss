@@ -1,4 +1,15 @@
 @import '../../../layout/colors.scss';
+@import '../../../layout/breakpoints.scss';
+@import '../../../layout/variables.scss';
+
+.label {
+	font-weight: $font-weight;
+	font-size: x-large;
+
+	@include sm {
+		font-size: medium;
+	}
+}
 
 .input {
 	width: 100%;
@@ -6,7 +17,7 @@
 	margin: 8px 0;
 	box-sizing: border-box;
 	border: 2px solid map-get($black, '0');
-	border-radius: 4px;
+	border-radius: $border-radius;
 }
 
 .invalid {
@@ -15,4 +26,5 @@
 
 .error {
 	color: map-get($red, '1');
+	margin-bottom: 20px;
 }

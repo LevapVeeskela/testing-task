@@ -16,24 +16,23 @@ const View: FC<Input> = (props): JSX.Element => {
 		inputClass,
 		required,
 		pattern,
-
 	} = props;
 	const [error, setError] = useState(props.error);
 	const { t } = useTranslation();
 	const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setError('');
-		if (pattern && !(new RegExp(pattern).test(event.target.value))) {
+		if (pattern && !new RegExp(pattern).test(event.target.value)) {
 			setError(t('FORM.ERRORS.INCORRECT'));
 		}
-		if (required && typeof event.target.value == 'undefined' || event.target.value == '') {
+		if ((required && typeof event.target.value == 'undefined') || event.target.value == '') {
 			setError(t('FORM.ERRORS.REQUIRED'));
 		}
-	}
+	};
 
 	return (
-		<>
+		<div>
 			{label && (
-				<label htmlFor={name} className={cx(labelClass)}>
+				<label htmlFor={name} className={cx(labelClass, style.label)}>
 					{label}:
 				</label>
 			)}
@@ -48,12 +47,8 @@ const View: FC<Input> = (props): JSX.Element => {
 				pattern={pattern}
 				onChange={changeHandler}
 			/>
-			{error &&
-				<span className={cx(style.error)}>
-					{error}
-				</span>
-			}
-		</>
+			{error && <div className={cx(style.error)}>{error}</div>}
+		</div>
 	);
 };
 

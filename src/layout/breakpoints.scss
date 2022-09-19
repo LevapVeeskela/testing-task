@@ -1,0 +1,25 @@
+@import './screen-sizes.scss';
+
+@mixin sm {
+	@media (max-width: #{$screen-size-sm}) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media (max-width: #{$screen-size-md}) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media (max-width: #{$screen-size-lg}) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media (max-width: #{$screen-size-xl}) {
+		@content;
+	}
+}

@@ -8,6 +8,7 @@ const Container: FC = (): JSX.Element => (
 	<div className={cx(style.container)}>
 		<View />
 	</div>
+
 );
 
 export default Container;

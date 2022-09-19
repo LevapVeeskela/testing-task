@@ -1,5 +1,8 @@
 {
 	"translation": {
+		"SELECTION": {
+			"DEFAULT": "Выберите один..."
+		},
 		"FORM": {
 			"FIELDS": {
 				"FIRST_NAME": {

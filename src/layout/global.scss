@@ -2,3 +2,54 @@
 @import './variables.scss';
 @import './colors.scss';
 @import './reset.scss';
+@import './screen-sizes.scss';
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	font-size: $font-size;
+	font-family: $font-family;
+}
+
+.container {
+	padding: 0 15px;
+
+	input {
+		min-width: $min-width
+	}
+}
+
+@media (min-width: #{$screen-size-sm}) {
+	.container {
+		max-width: 540px;
+		margin: auto;
+	}
+}
+
+@media (min-width: #{$screen-size-md}) {
+	.container {
+		max-width: 720px;
+	}
+
+	input::placeholder {
+		font-size: 0.5rem;
+	}
+}
+
+@media (min-width: #{$screen-size-lg}) {
+	.container {
+		max-width: 960px;
+	}
+}
+
+@media (min-width: #{$screen-size-sm}) {
+	.container {
+		max-width: 1140px;
+	}
+
+	input::placeholder {
+		font-size: 1rem;
+	}
+}

@@ -1,8 +1,14 @@
+.container {
+	width: 100%;
+	height: 100vh;
+}
+
 .lds-hourglass {
 	display: inline-block;
 	position: relative;
 	width: 80px;
 	height: 80px;
+	margin: calc(25% - 40px) calc(50% - 40px);
 }
 
 .lds-hourglass:after {

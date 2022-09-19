@@ -1,7 +1,15 @@
 import React, { FC } from 'react';
 import Main from '../shared/components/main';
-import style from './style.module.scss';
+import Header from '../shared/components/header'
 
-const View: FC = () => <Main />;
+const View: FC = () => (
+	<>
+		<Header></Header>
+		<div className="container">
+			<Main />
+		</div>
+	</>
+
+);
 
 export default View;

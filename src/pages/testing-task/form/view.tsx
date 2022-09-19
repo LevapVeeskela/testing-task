@@ -1,5 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import cx from 'classnames';
 import Input from '../../../shared/components/input';
 import { Field, FormCustom } from './interface';
 import style from './style.module.scss';
@@ -13,30 +14,33 @@ const View: FC<FormCustom> = (props) => {
 		console.log(e.currentTarget['FIRST_NAME'].value);
 		console.log(e.currentTarget['SECOND_NAME'].value);
 		// if (formRef.current && formRef.current['FIRST_NAME']) {
-		// 	(formRef.current['FIRST_NAME'] as HTMLInputElement).value = 'хуй тебе';
+		// 	(formRef.current['FIRST_NAME'] as HTMLInputElement).value = 'wwww eeee';
 		// }
 		// if (formRef.current && formRef.current['SECOND_NAME']) {
-		// 	(formRef.current['SECOND_NAME'] as HTMLInputElement).value = 'и тебе тоже хуй';
+		// 	(formRef.current['SECOND_NAME'] as HTMLInputElement).value = 'qqqqq';
 		// }
 	};
 
 	return fields?.length ? (
-		<form onSubmit={handleSubmit} ref={formRef}>
-			{fields.map(({ name, type, defaultValue, required, pattern }: Field) => (<div key={name}>
-				<Input label={t(`FORM.FIELDS.${name}.LABEL`, '')}
-					defaultValue={defaultValue}
-					type={type}
-					name={name}
-					placeholder={t(`FORM.FIELDS.${name}.PLACEHOLDER`, '')}
-					pattern={pattern}
-					required={required} />
-			</div>
+		<form onSubmit={handleSubmit} ref={formRef} className={cx(style.form)}>
+			{fields.map(({ name, type, defaultValue, required, pattern }: Field) => (
+				<div key={name}>
+					<Input
+						label={t(`FORM.FIELDS.${name}.LABEL`, '')}
+						defaultValue={defaultValue}
+						type={type}
+						name={name}
+						placeholder={t(`FORM.FIELDS.${name}.PLACEHOLDER`, '')}
+						pattern={pattern}
+						required={required}
+					/>
+				</div>
 			))}
-			<input type="submit" value={t('FORM.BUTTONS.READY', '')} />
+			<input type="submit" value={t('FORM.BUTTONS.READY', '')} className={cx(style.button)} />
 		</form>
-	)
-		:
-		t('FORM.ERRORS.SECOND_NAME.LABEL');
+	) : (
+		t('FORM.ERRORS.SECOND_NAME.LABEL')
+	);
 };
 
 export default View;

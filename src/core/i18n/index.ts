@@ -4,7 +4,7 @@ import { initReactI18next } from 'react-i18next';
 import { en, ru } from './languages';
 import { getInitialLanguage } from '../helpers';
 
-const resources = {
+export const resources = {
 	en,
 	ru,
 };
