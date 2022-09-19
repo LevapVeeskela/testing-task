@@ -13,6 +13,11 @@
 			},
 			"BUTTONS": {
 				"READY": "Ready"
+			},
+			"ERRORS": {
+				"NOT_FIELDS": "Don't found fields to display!",
+				"INCORRECT": "Incorrect value!",
+				"REQUIRED": "Required fields!"
 			}
 		}
 	}

@@ -1,0 +1,18 @@
+@import '../../../layout/colors.scss';
+
+.input {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 2px solid map-get($black, '0');
+	border-radius: 4px;
+}
+
+.invalid {
+	border-color: map-get($red, '0');
+}
+
+.error {
+	color: map-get($red, '1');
+}
