@@ -16,7 +16,7 @@
 	padding: 12px 20px;
 	margin: 8px 0;
 	box-sizing: border-box;
-	border: 2px solid map-get($black, '0');
+	border: $border;
 	border-radius: $border-radius;
 }
 

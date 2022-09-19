@@ -1,5 +1,9 @@
 {
 	"translation": {
+		"HEADER": {
+			"REPOSITORY": "Repository", 
+			"REPOSITORY_TITLE": "Link of repository on github" 
+		},
 		"SELECTION": {
 			"DEFAULT": "Choose one..."
 		},

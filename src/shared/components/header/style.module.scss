@@ -1,13 +1,27 @@
-.container {
-	position: relative;
-	padding: 5px 10px;
-}
-
 .header {
 	position: relative;
-}
+	height: 40px;
+	padding: 5px;
+	min-width: 305px;
 
-.selection {
-	position: absolute;
-	right: 10px;
-}
+	.menu {
+		a {
+			text-decoration: none;
+			position: absolute;
+			left: 10px;
+		}
+
+		ul {
+			list-style: none;
+		}
+
+		ul li {
+			display: inline;
+		}
+
+		.section {
+			position: absolute;
+			right: 10px;
+		}
+	}
+	}

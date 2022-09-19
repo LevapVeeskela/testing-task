@@ -1,3 +1,5 @@
+@import './colors.scss';
+
 $min-width: 250px;
 $font-size: 16px;
 $font-weight: 700;
@@ -7,3 +9,4 @@ $font-family: CerebriSans-Regular,
 system-ui,
 Roboto,
 sans-serif;
+$border: 2px solid map-get($black, '0');

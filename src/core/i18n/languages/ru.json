@@ -1,5 +1,9 @@
 {
 	"translation": {
+		"HEADER": {
+			"REPOSITORY": "Репа с проектом",
+			"REPOSITORY_TITLE": "Ссылка на репозиторий github"
+		},
 		"SELECTION": {
 			"DEFAULT": "Выберите один..."
 		},

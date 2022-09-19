@@ -1,4 +1,9 @@
+@import '../../../layout/variables.scss';
+
 .select {
 	padding: 5px;
 	text-align: center;
+	border: $border;
+	border-radius: $border-radius;
+	font-size: $font-size;
 }
