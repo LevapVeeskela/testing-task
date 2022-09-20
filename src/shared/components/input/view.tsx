@@ -6,7 +6,7 @@ import { Input } from './interface';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 
-const View: FC<Input> = observer((props): JSX.Element => {
+const View: FC<Input> = (props): JSX.Element => {
 	const {
 		label,
 		labelClass,
@@ -29,17 +29,21 @@ const View: FC<Input> = observer((props): JSX.Element => {
 		const isRequired = (required && typeof value == 'undefined') || value == '';
 		const isHaveError = isInCorrect || isRequired;
 		if (isInCorrect) {
-			setError(() => t('FORM.ERRORS.INCORRECT'));
+			setError(() => sendError(value, t('FORM.ERRORS.INCORRECT'), name));
 		}
 		if (isRequired) {
-			setError(() => t('FORM.ERRORS.REQUIRED'));
+			setError(() => sendError(value, t('FORM.ERRORS.REQUIRED'), name));
 		}
 		if (!isHaveError && onChangeHandler) {
 			onChangeHandler(value, name, error);
 		}
-		if (isHaveError && onCatchErrorHandler) {
+	};
+
+	const sendError = (value: string, error: string, name?: string): string => {
+		if (onCatchErrorHandler) {
 			onCatchErrorHandler(value, name, error);
 		}
+		return error;
 	};
 
 	return (
@@ -63,6 +67,6 @@ const View: FC<Input> = observer((props): JSX.Element => {
 			{error && <div className={cx(style.error)}>{error}</div>}
 		</div>
 	);
-});
+};
 
 export default View;

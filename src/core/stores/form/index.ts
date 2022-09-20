@@ -30,7 +30,7 @@ export class FormStore {
 	setFields({ value, name }: FieldValue): void {
 		const fieldValueOldIndex = this.fieldValues.findIndex((f) => f.name === name);
 		if (name && !value && fieldValueOldIndex != -1) {
-			this.fieldValues.splice(fieldValueOldIndex, 1)
+			this.fieldValues.splice(fieldValueOldIndex, 1);
 			return;
 		}
 		if (value) {
@@ -38,19 +38,19 @@ export class FormStore {
 			if (fieldValueOldIndex != -1) {
 				this.fieldValues[fieldValueOldIndex].value = value;
 				return;
-			} 
-			this.fieldValues.push({ value, name })
+			}
+			this.fieldValues.push({ value, name });
 		}
 	}
 
 	// #region for testing task only
 	onSumbit(): void {
-		const firstName = this.fieldValues.find(f => f.name == FIRST_NAME)?.value;
-		const secondName = this.fieldValues.find(f => f.name == SECOND_NAME)?.value;
+		const firstName = this.fieldValues.find((f) => f.name == FIRST_NAME)?.value;
+		const secondName = this.fieldValues.find((f) => f.name == SECOND_NAME)?.value;
 		if (firstName && secondName) {
 			this.commonStore.setModal(true, t('MODAL.WELCOM', { firstName, secondName }));
 		}
-		this.fieldValues.forEach(f => sessionStorage.removeItem(f.name));
+		this.fieldValues.forEach((f) => sessionStorage.removeItem(f.name));
 		this.fieldValues = [];
 	}
 	// #endregion
