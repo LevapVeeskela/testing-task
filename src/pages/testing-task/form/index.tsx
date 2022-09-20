@@ -1,26 +1,18 @@
 import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import cx from 'classnames';
-import { Field } from './interface';
 import View from './view';
 import style from './style.module.scss';
+import { useStores } from '../../../core/hooks/stores';
 
-const fields: Field[] = [
-	{
-		type: 'text',
-		name: 'FIRST_NAME',
-		required: true,
-	},
-	{
-		type: 'text',
-		name: 'SECOND_NAME',
-		required: true,
-	},
-];
+const Container: FC = observer((): JSX.Element => {
+	const { formStore } = useStores();
 
-const Container: FC = () => (
-	<div className={cx(style.container)}>
-		<View fields={fields} />
-	</div>
-);
+	return (
+		<div className={cx(style.container)}>
+			<View fields={formStore.fields} />
+		</div>
+	);
+});
 
 export default Container;

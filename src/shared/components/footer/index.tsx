@@ -1,5 +1,5 @@
-import { observer } from 'mobx-react-lite';
 import React, { FC } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../core/hooks/stores';
 import View from './view';
 

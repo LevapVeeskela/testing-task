@@ -4,6 +4,7 @@ import cx from 'classnames';
 import style from './style.module.scss';
 import { Input } from './interface';
 import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react-lite';
 
 const View: FC<Input> = (props): JSX.Element => {
 	const {
@@ -16,17 +17,33 @@ const View: FC<Input> = (props): JSX.Element => {
 		inputClass,
 		required,
 		pattern,
+		onChangeHandler,
+		onCatchErrorHandler,
 	} = props;
 	const [error, setError] = useState(props.error);
 	const { t } = useTranslation();
 	const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setError('');
-		if (pattern && !new RegExp(pattern).test(event.target.value)) {
-			setError(t('FORM.ERRORS.INCORRECT'));
+		const value = event.target.value;
+		const isInCorrect = pattern && !new RegExp(pattern).test(value);
+		const isRequired = (required && typeof value == 'undefined') || value == '';
+		const isHaveError = isInCorrect || isRequired;
+		if (isInCorrect) {
+			setError(() => sendError(value, t('FORM.ERRORS.INCORRECT'), name));
 		}
-		if ((required && typeof event.target.value == 'undefined') || event.target.value == '') {
-			setError(t('FORM.ERRORS.REQUIRED'));
+		if (isRequired) {
+			setError(() => sendError(value, t('FORM.ERRORS.REQUIRED'), name));
 		}
+		if (!isHaveError && onChangeHandler) {
+			onChangeHandler(value, name, error);
+		}
+	};
+
+	const sendError = (value: string, error: string, name?: string): string => {
+		if (onCatchErrorHandler) {
+			onCatchErrorHandler(value, name, error);
+		}
+		return error;
 	};
 
 	return (

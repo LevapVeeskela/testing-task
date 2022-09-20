@@ -1,13 +1,8 @@
-export interface Option {
-	value: string;
-	label: string;
-	selected?: boolean;
-	disabled: boolean;
-}
+import { Option } from '../../../core/models';
 
 export interface Selection {
 	selected?: Option;
 	options: Option[];
-	cb: (...args: any[]) => any;
+	cb: (...args: any[]) => void;
 	style?: { [key: string]: string };
 }

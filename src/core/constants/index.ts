@@ -1,2 +1,3 @@
 export * from './routes';
-export * from './shared';
+export * from './common';
+export * from './fake-data';

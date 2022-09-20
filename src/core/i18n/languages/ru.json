@@ -1,11 +1,20 @@
 {
 	"translation": {
+		"MODAL": {
+			"WELCOM": "Здравствуйте, {{firstName}} {{secondName}}"
+		},
+		"DESCRIPTION": {
+			"STACK":
+			"Стек проекта: React 18.2 в функциональном стиле, Typescript, Mobx в качестве стейт-менеджера, без использованя UI-kit"
+		},
 		"HEADER": {
 			"REPOSITORY": "Репа с проектом",
-			"REPOSITORY_TITLE": "Ссылка на репозиторий github"
+			"REPOSITORY_TITLE": "Ссылка на репозиторий github",
+			"SPECIFICATION": "ТЗ",
+			"SPECIFICATION_TITLE": "Ссылка на ТЗ github"
 		},
 		"SELECTION": {
-			"DEFAULT": "Выберите один..."
+			"DEFAULT": "Выберите из списка..."
 		},
 		"FORM": {
 			"FIELDS": {
