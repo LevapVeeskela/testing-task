@@ -7,17 +7,10 @@
 	min-width: 305px;
 
 	.menu {
-		@include sm {
-			margin-bottom: 40px;
-		}
 		a {
 			text-decoration: none;
 			float: left;
 			padding: 10px;
-
-			@include sm {
-				float: none;
-			}
 		}
 
 		ul {
@@ -26,18 +19,13 @@
 
 		ul li {
 			display: inline;
-			@include sm {
-				display: flex;
-				float: none;
-			}
+			padding: 10px;
 		}
 
 		.section {
-			float: right;
-
-			@include sm {
-				float: none;
-			}
+			position: absolute;
+			right: 10px;
+			top: 5px;
 		}
 	}
 }

@@ -13,7 +13,6 @@ const Form = lazy(() => {
 		new Promise(resolve => setTimeout(resolve, 1000)) // чисто для красоты, имитация загрузки из сервера
 	])
 		.then(([moduleExports]) => {
-			console.log(123)
 			RootStore.lastInstantce.commonStore.setIsLoading(false);
 			return moduleExports;
 		});

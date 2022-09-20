@@ -1,5 +1,8 @@
 {
 	"translation": {
+		"DESCRIPTION": {
+			"STACK": "Стек проекта: React 18.2 в фунеционалньом стиле, Typescript, Mobx в качестве стейтменеджера, без использованя UI-kit"
+		},
 		"HEADER": {
 			"REPOSITORY": "Репа с проектом",
 			"REPOSITORY_TITLE": "Ссылка на репозиторий github",

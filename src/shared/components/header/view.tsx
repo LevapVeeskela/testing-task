@@ -1,41 +1,57 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import cx from 'classnames';
-
-import style from './style.module.scss';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
-import { Option } from '../selection/interface';
-import { resources } from '../../../core/i18n';
+import { Option } from '../../../core/models';
 import Selection from '../selection';
 import { REPOSITORY, SPECIFICATION } from '../../../core/constants';
+import { getLanguageOptions } from '../../../core/i18n';
+import style from './style.module.scss';
+import { useStores } from '../../../core/hooks/stores';
 
-const View: FC = (): JSX.Element => {
-	const { i18n, t } = useTranslation();
-	const languages: Option[] = Object.keys(resources).map((l) => {
-		const option: Option = { value: l, label: l.toString(), selected: false, disabled: false };
-		if (i18n.language === l) {
-			option.selected = true;
-		}
-		return option;
-	});
-	const changeLanguageHandler = (language: string) => i18n.changeLanguage(language);
+const View: FC = observer((): JSX.Element => {
+	const { t } = useTranslation();
+	const [languagesOptions, setLanguageOptions] = useState<Option[]>(getLanguageOptions());
+	const { commonStore } = useStores();
+	const changeLanguageHandler = (language: string) => {
+		commonStore.setLanguage(language);
+		setLanguageOptions(() => getLanguageOptions())
+	};
 
 	return (
 		<header className={cx(style['header'])}>
 			<div className={cx(style['menu'])}>
 				<ul>
-					<li><a target='_blank' rel="noopener noreferrer" href={REPOSITORY} title={t('HEADER.REPOSITORY_TITLE')} > {t('HEADER.REPOSITORY')}</a>
+					<li>
+						<a
+							target="_blank"
+							rel="noopener noreferrer"
+							href={REPOSITORY}
+							title={t('HEADER.REPOSITORY_TITLE')}
+						>
+							{' '}
+							{t('HEADER.REPOSITORY')}
+						</a>
 					</li>
-					<li><a target='_blank' rel="noopener noreferrer" href={SPECIFICATION} title={t('HEADER.SPECIFICATION_TITLE')} > {t('HEADER.SPECIFICATION')}</a>
+					<li>
+						<a
+							target="_blank"
+							rel="noopener noreferrer"
+							href={SPECIFICATION}
+							title={t('HEADER.SPECIFICATION_TITLE')}
+						>
+							{' '}
+							{t('HEADER.SPECIFICATION')}
+						</a>
 					</li>
 					<li className={cx(style.section)}>
-						<Selection options={languages} cb={changeLanguageHandler} />
+						<Selection options={languagesOptions} cb={changeLanguageHandler} style={{ width: '60px' }} />
 					</li>
 				</ul>
 			</div>
-			<div className={cx(style['selection'])}>
-			</div>
+			<div className={cx(style['selection'])}></div>
 		</header>
 	);
-};
+});
 
 export default View;

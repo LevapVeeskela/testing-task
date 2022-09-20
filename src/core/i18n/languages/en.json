@@ -1,5 +1,8 @@
 {
 	"translation": {
+		"DESCRIPTION": {
+			"STACK": "Stack project: React 18.2 in function style, Typescript, Mobx - state manager, without use UI-kit"
+		},
 		"HEADER": {
 			"REPOSITORY": "Repository", 
 			"REPOSITORY_TITLE": "Link of repository on github",

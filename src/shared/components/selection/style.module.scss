@@ -5,5 +5,13 @@
 	padding: 5px;
 	text-align: center;
 	border: $border;
-	@include input-default
+	@include input-default;
+
+	&:hover {
+		cursor: pointer;
+	}
+
+	option {
+		width: auto;
+	}
 }

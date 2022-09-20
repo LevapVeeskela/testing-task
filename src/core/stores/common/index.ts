@@ -1,7 +1,7 @@
 import { makeAutoObservable, autorun } from 'mobx';
 
 import { LANGUAGE } from '../../constants';
-import { getInitialLanguage } from '../../helpers';
+import i18n, { getInitialLanguage } from '../../i18n';
 
 export class CommonStore {
 	language: string;
@@ -9,7 +9,6 @@ export class CommonStore {
 
 	constructor() {
 		makeAutoObservable(this);
-
 		this.language = getInitialLanguage();
 		this.isLoading = true;
 
@@ -21,10 +20,10 @@ export class CommonStore {
 	setLanguage(language: string): void {
 		this.language = language;
 		localStorage.setItem(LANGUAGE, language);
+		i18n.changeLanguage(language)
 	}
 
 	setIsLoading(isLoading: boolean): void {
-		console.log('setIsLoading store:', isLoading)
 		this.isLoading = isLoading;
 	}
 }
