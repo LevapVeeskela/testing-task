@@ -36,3 +36,7 @@
 
 		@include input-default
 	}
+	.invalid {
+		background-color: #ff0000;
+		opacity: 0.5;
+	}

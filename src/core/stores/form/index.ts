@@ -29,7 +29,7 @@ export class FormStore {
 
 	setFields({ value, name }: FieldValue): void {
 		const fieldValueOldIndex = this.fieldValues.findIndex((f) => f.name === name);
-		if (name && !value && fieldValueOldIndex) {
+		if (name && !value && fieldValueOldIndex != -1) {
 			this.fieldValues.splice(fieldValueOldIndex, 1)
 			return;
 		}
@@ -51,6 +51,7 @@ export class FormStore {
 			this.commonStore.setModal(true, t('MODAL.WELCOM', { firstName, secondName }));
 		}
 		this.fieldValues.forEach(f => sessionStorage.removeItem(f.name));
+		this.fieldValues = [];
 	}
 	// #endregion
 }
