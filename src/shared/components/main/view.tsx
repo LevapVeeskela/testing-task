@@ -5,6 +5,7 @@ import cx from 'classnames';
 import style from './style.module.scss';
 import { routes } from '../../../core/routes';
 import Loader from '../loader';
+import Modal from '../modal';
 
 const View: FC = (): JSX.Element => {
 	return (
@@ -21,6 +22,7 @@ const View: FC = (): JSX.Element => {
 						);
 					})}
 				</Routes>
+				<Modal />
 			</Suspense>
 		</main>
 	);

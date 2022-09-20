@@ -6,11 +6,15 @@ import i18n, { getInitialLanguage } from '../../i18n';
 export class CommonStore {
 	language: string;
 	isLoading: boolean;
+	isOpenModal: boolean;
+	textModal: string;
 
 	constructor() {
 		makeAutoObservable(this);
 		this.language = getInitialLanguage();
 		this.isLoading = true;
+		this.isOpenModal = false;
+		this.textModal = '';
 
 		autorun(() => {
 			localStorage.setItem(LANGUAGE, this.language);
@@ -25,5 +29,10 @@ export class CommonStore {
 
 	setIsLoading(isLoading: boolean): void {
 		this.isLoading = isLoading;
+	}
+
+	setModal(isOpen: boolean, text: string): void {
+		this.isOpenModal = isOpen;
+		this.textModal = text;
 	}
 }

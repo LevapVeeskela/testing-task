@@ -1,5 +1,8 @@
 {
 	"translation": {
+		"MODAL": {
+			"WELCOM": "Weclom, {{firstName}} {{secondName}}"
+		},
 		"DESCRIPTION": {
 			"STACK": "Stack project: React 18.2 in function style, Typescript, Mobx - state manager, without use UI-kit"
 		},

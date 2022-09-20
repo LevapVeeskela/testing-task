@@ -1,5 +1,8 @@
 {
 	"translation": {
+		"MODAL": {
+			"WELCOM": "Здравствуйте, {{firstName}} {{secondName}}"
+		},
 		"DESCRIPTION": {
 			"STACK": "Стек проекта: React 18.2 в фунеционалньом стиле, Typescript, Mobx в качестве стейтменеджера, без использованя UI-kit"
 		},

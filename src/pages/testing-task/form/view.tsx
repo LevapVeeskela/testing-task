@@ -5,8 +5,10 @@ import Input from '../../../shared/components/input';
 import { Field, FormCustom } from '../../../core/models/form';
 import style from './style.module.scss';
 import { observer } from 'mobx-react-lite';
+import { useStores } from '../../../core/hooks/stores';
 
 const View: FC<FormCustom> = observer((props) => {
+	const { commonStore } = useStores();
 	const { fields } = props;
 	const { t } = useTranslation();
 	const formRef = useRef(null);
@@ -14,6 +16,8 @@ const View: FC<FormCustom> = observer((props) => {
 		e.preventDefault();
 		console.log(e.currentTarget['FIRST_NAME'].value);
 		console.log(e.currentTarget['SECOND_NAME'].value);
+		const values = { firstName: e.currentTarget['FIRST_NAME'].value, secondName: e.currentTarget['SECOND_NAME'].value }
+		commonStore.setModal(true, t('MODAL.WELCOM', values));
 		// if (formRef.current && formRef.current['FIRST_NAME']) {
 		// 	(formRef.current['FIRST_NAME'] as HTMLInputElement).value = 'wwww eeee';
 		// }
