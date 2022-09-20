@@ -16,6 +16,7 @@ const View: FC<Input> = (props): JSX.Element => {
 		inputClass,
 		required,
 		pattern,
+		onChangeHandler
 	} = props;
 	const [error, setError] = useState(props.error);
 	const { t } = useTranslation();
@@ -26,6 +27,9 @@ const View: FC<Input> = (props): JSX.Element => {
 		}
 		if ((required && typeof event.target.value == 'undefined') || event.target.value == '') {
 			setError(t('FORM.ERRORS.REQUIRED'));
+		}
+		if (!error && onChangeHandler) {
+			onChangeHandler(event.target.value, name, error);
 		}
 	};
 

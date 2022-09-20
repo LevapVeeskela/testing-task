@@ -3,31 +3,39 @@ import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Input from '../../../shared/components/input';
 import { Field, FormCustom } from '../../../core/models/form';
-import style from './style.module.scss';
 import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../core/hooks/stores';
+import style from './style.module.scss';
 
 const View: FC<FormCustom> = observer((props) => {
-	const { commonStore } = useStores();
-	const { fields } = props;
+	const [isDisabledButton, setIsDisabledButton] = useState(false);
+	const { formStore } = useStores();
+	const { fields = [] } = props;
 	const { t } = useTranslation();
-	const formRef = useRef(null);
+	const formRef = useRef<HTMLFormElement>(null);
+
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(e.currentTarget['FIRST_NAME'].value);
-		console.log(e.currentTarget['SECOND_NAME'].value);
-		const values = { firstName: e.currentTarget['FIRST_NAME'].value, secondName: e.currentTarget['SECOND_NAME'].value }
-		commonStore.setModal(true, t('MODAL.WELCOM', values));
-		// if (formRef.current && formRef.current['FIRST_NAME']) {
-		// 	(formRef.current['FIRST_NAME'] as HTMLInputElement).value = 'wwww eeee';
-		// }
-		// if (formRef.current && formRef.current['SECOND_NAME']) {
-		// 	(formRef.current['SECOND_NAME'] as HTMLInputElement).value = 'qqqqq';
-		// }
-	};
+		console.log('handleSubmit', fields.length == formStore.fieldValues.length)
+		console.log('handleSubmit', fields)
+		console.log('handleSubmit', formStore.fieldValues)
+		formStore.onSumbit();
+	}
+
+	const changeHandler = (value: string, name: string) => {
+		formStore.setFields({ value, name });
+		console.log('changeHandler', fields.length == formStore.fieldValues.length)
+		if (fields.length == formStore.fieldValues.length) {
+			setIsDisabledButton(false);
+		}
+	}
+
+	const catchErrorHandler = (value: string, name: string, error: string) => {
+		console.info(name, error);
+	}
 
 	return fields?.length ? (
-		<form onSubmit={handleSubmit} ref={formRef} className={cx(style.form)}>
+		<form onSubmit={handleSubmit} ref={formRef} className={cx(style.form)} noValidate>
 			{fields.map(({ name, type, defaultValue, required, pattern }: Field) => (
 				<div key={name}>
 					<Input
@@ -38,10 +46,12 @@ const View: FC<FormCustom> = observer((props) => {
 						placeholder={t(`FORM.FIELDS.${name}.PLACEHOLDER`, '')}
 						pattern={pattern}
 						required={required}
+						onChangeHandler={changeHandler}
+						onCatchErrorHandler={catchErrorHandler}
 					/>
 				</div>
 			))}
-			<input type="submit" value={t('FORM.BUTTONS.READY', '')} className={cx(style.button)} />
+			<input type="submit" value={t('FORM.BUTTONS.READY', '')} className={cx(style.button)} disabled={isDisabledButton} />
 		</form>
 	) : (
 		t('FORM.ERRORS.SECOND_NAME.LABEL')

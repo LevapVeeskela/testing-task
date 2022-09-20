@@ -9,4 +9,6 @@ export interface Input {
 	required?: boolean;
 	inputClass?: string;
 	error?: string;
+	onChangeHandler?: (...arg: any) => any;
+	onCatchErrorHandler?: (...arg: any) => any;
 }

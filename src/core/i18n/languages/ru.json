@@ -4,7 +4,8 @@
 			"WELCOM": "Здравствуйте, {{firstName}} {{secondName}}"
 		},
 		"DESCRIPTION": {
-			"STACK": "Стек проекта: React 18.2 в фунеционалньом стиле, Typescript, Mobx в качестве стейтменеджера, без использованя UI-kit"
+			"STACK":
+			"Стек проекта: React 18.2 в функциональном стиле, Typescript, Mobx в качестве стейт-менеджера, без использованя UI-kit"
 		},
 		"HEADER": {
 			"REPOSITORY": "Репа с проектом",

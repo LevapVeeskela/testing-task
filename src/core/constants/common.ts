@@ -1,3 +1,5 @@
+export const FIRST_NAME = 'FIRST_NAME';
+export const SECOND_NAME = 'SECOND_NAME';
 export const LANGUAGE = 'LANGUAGE';
 export const DEFAULT = 'DEFAULT';
 export const EN = 'en';

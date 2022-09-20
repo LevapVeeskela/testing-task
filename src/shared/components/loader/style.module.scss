@@ -1,3 +1,5 @@
+@import '../../../layout/colors.scss';
+
 .container {
 	width: 100%;
 	height: 100vh;
@@ -12,15 +14,15 @@
 }
 
 .lds-hourglass:after {
-	content: " ";
+	content: ' ';
 	display: block;
 	border-radius: 50%;
 	width: 0;
 	height: 0;
 	margin: 8px;
 	box-sizing: border-box;
-	border: 32px solid rgb(250, 44, 44);
-	border-color: rgb(250, 44, 44) transparent rgb(250, 44, 44) transparent;
+	border: 32px solid #81f8ad;
+	border-color: #81f8ad transparent #81f8ad transparent;
 	animation: lds-hourglass 1.2s infinite;
 }
 

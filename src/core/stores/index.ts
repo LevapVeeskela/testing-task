@@ -9,7 +9,7 @@ export class RootStore {
 
 	constructor() {
 		this.commonStore = new CommonStore();
-		this.formStore = new FormStore();
+		this.formStore = new FormStore(this.commonStore);
 		RootStore.lastInstantce = this;
 	}
 }

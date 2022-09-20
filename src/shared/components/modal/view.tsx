@@ -8,12 +8,12 @@ const View: FC<{ onClose: () => void, text: string }> = ({ onClose, text }): JSX
 		<div
 			className={cx(style['container'])}
 		>
-			<p className={cx(style['close_btn'])} onClick={onClose}>
+			<span className={cx(style['close_btn'])} onClick={onClose}>
 				X
-			</p>
-			<p className={cx(style['content'])}>
+			</span>
+			<div className={cx(style['content'])}>
 				{text}
-			</p>
+			</div>
 		</div>
 	);
 };
