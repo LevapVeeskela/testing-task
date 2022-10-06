@@ -1,6 +1,6 @@
 import { makeAutoObservable, autorun } from 'mobx';
 import { FIELDS_DATA, FIRST_NAME, SECOND_NAME } from '../../constants';
-import { Field, FieldValue } from '../../models/form';
+import { Field, FieldError, FieldValue } from '../../models/form';
 import { CommonStore } from '../common';
 import { t } from 'i18next';
 
@@ -8,13 +8,16 @@ export class FormStore {
 	isLoading: boolean;
 	fields: Field[];
 	fieldValues: FieldValue[];
+	fieldErrors: FieldError[];
+	isDisabled: boolean;
 	commonStore: CommonStore;
 
 	constructor(commonStore: CommonStore) {
 		makeAutoObservable(this);
 		this.fields = FIELDS_DATA;
 		this.fieldValues = [];
-		this.isLoading = true;
+		this.fieldErrors = [];
+		this.isLoading = this.isDisabled = true;
 		this.commonStore = commonStore;
 		autorun(() => {
 			this.fields.forEach((field, index) => {
@@ -24,6 +27,7 @@ export class FormStore {
 					this.fieldValues.push({ name: field.name, value: fieldValue });
 				}
 			});
+			this.isDisabled = this.fields.length != this.fieldValues.length;
 		});
 	}
 
@@ -41,6 +45,14 @@ export class FormStore {
 			}
 			this.fieldValues.push({ value, name });
 		}
+	}
+
+	setFieldErrors(fieldErrors: FieldError[]): void {
+		this.fieldErrors = fieldErrors;
+	}
+
+	setIsDisabled(isDisabled: boolean): void {
+		this.isDisabled = isDisabled;
 	}
 
 	// #region for testing task only
