@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import cx from 'classnames';
 import Input from '../../../shared/components/input';
@@ -7,10 +7,10 @@ import { observer } from 'mobx-react-lite';
 import { useStores } from '../../../core/hooks/stores';
 
 import style from './style.module.scss';
+
 const InputSumbit: FC = observer(() => {
 	const { formStore } = useStores();
 	const { t } = useTranslation();
-
 	return (
 		<input
 			type="submit"
@@ -33,33 +33,31 @@ const View: FC<FormCustom> = (props) => {
 		for (const field of fields) {
 			e.currentTarget[field.name].value = '';
 		}
-		formStore.fieldErrors = [];
-		formStore.setIsDisabled(true);
 	};
 
-	const changeHandler = (value: string, name: string) => {
-		formStore.setFields({ value, name });
+	const changeHandler = useCallback((value: string, name: string) => {
+		formStore.setField({ value, name });
 		const fieldErrorIndex = formStore.fieldErrors.findIndex((f) => f.name == name);
 		const isFillFields = fields.length == formStore.fieldValues.length;
 		if (fieldErrorIndex != -1) {
-			formStore.fieldErrors.splice(fieldErrorIndex, 1);
+			formStore.removeFieldErrorByIndex(fieldErrorIndex);
 		}
 
 		formStore.setIsDisabled(!!formStore.fieldErrors.length || !isFillFields);
-	};
+	}, []);
 
-	const catchErrorHandler = (value: string, name: string, error: string) => {
+	const catchErrorHandler = useCallback((value: string, name: string, error: string) => {
 		const newFieldErrors = [
 			...(formStore.fieldErrors.filter((f) => f.name != name) || []),
 			{ value, name, error },
 		];
 		formStore.setIsDisabled(true);
 		formStore.setFieldErrors(newFieldErrors);
-	};
+	}, []);
 
 	return fields?.length ? (
 		<form onSubmit={handleSubmit} ref={formRef} className={cx(style.form)} noValidate>
-			{fields.map(({ name, type, defaultValue, required, pattern }: Field, index) => (
+			{fields.map(({ name, type, defaultValue, required, pattern, maxlength }: Field, index) => (
 				<Input
 					key={index}
 					label={t(`FORM.FIELDS.${name}.LABEL`, '')}
@@ -69,6 +67,7 @@ const View: FC<FormCustom> = (props) => {
 					placeholder={t(`FORM.FIELDS.${name}.PLACEHOLDER`, '')}
 					pattern={pattern}
 					required={required}
+					maxlength={maxlength}
 					onChangeHandler={changeHandler}
 					onCatchErrorHandler={catchErrorHandler}
 				/>

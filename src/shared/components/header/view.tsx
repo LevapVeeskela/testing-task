@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import cx from 'classnames';
-import { observer } from 'mobx-react-lite';
+import { observer,  } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import { Option } from '../../../core/models';
 import Selection from '../selection';

@@ -1,78 +1,88 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react/prop-types */
-
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import cx from 'classnames';
 
 import style from './style.module.scss';
-import { Input } from './interface';
+import { Input, InputError } from './interface';
 import { useTranslation } from 'react-i18next';
 
-const View = React.memo<Input>(
-	(props): JSX.Element => {
-		const {
-			label,
-			labelClass,
-			defaultValue,
-			type,
-			name,
-			placeholder,
-			inputClass,
-			required,
-			pattern,
-			onChangeHandler,
-			onCatchErrorHandler,
-		} = props;
+const View: FC<Input> = (props): JSX.Element => {
+	const {
+		label,
+		labelClass,
+		defaultValue,
+		type,
+		name,
+		placeholder,
+		inputClass,
+		required,
+		pattern,
+		maxlength,
+		onChangeHandler,
+		onCatchErrorHandler,
+	} = props;
 
-		const [error, setError] = useState(props.error);
-		const { t } = useTranslation();
-		const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-			const value = event.target.value;
-			const isInCorrect = pattern && !new RegExp(pattern).test(value);
-			const isRequired = (required && typeof value == 'undefined') || value == '';
-			const isHaveError = isInCorrect || isRequired;
-			let error = '';
+	const [error, setError] = useState<InputError>({ text: props.error });
+	const { t } = useTranslation();
 
-			if (isInCorrect) {
-				error = t('FORM.ERRORS.INCORRECT');
-				setError(() => error);
-			}
-			if (isRequired) {
-				error = t('FORM.ERRORS.REQUIRED');
-				setError(() => error);
-			}
-			if (onCatchErrorHandler && error) {
-				onCatchErrorHandler(value, name, error);
-			}
-			if (!isHaveError && onChangeHandler) {
-				setError(() => '');
-				onChangeHandler(value, name, error);
-			}
-		};
+	useEffect(() => {
+		const { path } = error;
+		if (path) {
+			const text = t(path);
+			setError(() => ({ text, path }));
+		}
+	}, [props]);
 
-		return (
-			<div>
-				{label && (
-					<label htmlFor={name} className={cx(labelClass, style.label)}>
-						{label}:
-					</label>
-				)}
-				<input
-					id={name}
-					defaultValue={defaultValue}
-					type={type}
-					name={name}
-					placeholder={placeholder}
-					className={cx(inputClass, style.input, error ? style.invalid : '')}
-					required={required}
-					pattern={pattern}
-					onChange={changeHandler}
-				/>
-				{error && <div className={cx(style.error)}>{error}</div>}
-			</div>
-		);
-	},
-	(p, c) => p.label != c.label,
+	const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value;
+		const isInCorrect = pattern && !new RegExp(pattern).test(value);
+		const isRequired = (required && typeof value == 'undefined') || value == '';
+		const isHaveError = isInCorrect || isRequired;
+		let text = '';
+
+		if (isInCorrect) {
+			const path = 'FORM.ERRORS.INCORRECT';
+			text = t(path);
+			setError(() => ({ text, path }));
+		}
+		if (isRequired) {
+			const path = 'FORM.ERRORS.REQUIRED';
+			text = t(path);
+			setError(() => ({ text, path }));
+		}
+		if (onCatchErrorHandler && text) {
+			onCatchErrorHandler(value, name, text);
+		}
+		if (!isHaveError && onChangeHandler) {
+			setError(() => ({ text: '' }));
+			onChangeHandler(value, name, text);
+		}
+	};
+
+	return (
+		<div>
+			{label && (
+				<label htmlFor={name} className={cx(labelClass, style.label)}>
+					{label}:
+				</label>
+			)}
+			<input
+				id={name}
+				defaultValue={defaultValue}
+				type={type}
+				name={name}
+				placeholder={placeholder}
+				className={cx(inputClass, style.input, error?.text ? style.invalid : '')}
+				required={required}
+				pattern={pattern?.toString()}
+				maxLength={maxlength}
+				onChange={changeHandler}
+			/>
+			{error?.text && <div className={cx(style.error)}>{error?.text}</div>}
+		</div>
+	);
+};
+
+export default React.memo<Input>(
+	View,
+	(p, c) => p.label == c.label || p.placeholder == c.placeholder,
 );
-
-export default View;

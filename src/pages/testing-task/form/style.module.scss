@@ -1,3 +1,4 @@
+@import '../../../layout/breakpoints.scss';
 @import '../../../layout/variables.scss';
 @import '../../../layout/colors.scss';
 @import '../../../layout/mixins.scss';
@@ -5,6 +6,9 @@
 .container {
   display: flex;
   height: 80vh;
+	@include sm {
+		height: 70vh;
+	}
 }
 
 .form {

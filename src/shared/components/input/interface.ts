@@ -5,10 +5,16 @@ export interface Input {
 	type: string;
 	name?: string;
 	placeholder?: string;
-	pattern?: string;
+	pattern?: RegExp | string;
+	maxlength?: number;
 	required?: boolean;
 	inputClass?: string;
 	error?: string;
 	onChangeHandler?: (...arg: any) => any;
 	onCatchErrorHandler?: (...arg: any) => any;
+}
+
+export interface InputError {
+	text?: string;
+	path?: string;
 }
