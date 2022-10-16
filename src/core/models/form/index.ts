@@ -2,8 +2,9 @@ export interface Field {
 	type: string;
 	defaultValue?: string | number | ReadonlyArray<string> | undefined;
 	name: string;
+	maxlength: number;
 	required?: boolean;
-	pattern?: string;
+	pattern?: RegExp | string;
 }
 export interface FieldValue {
 	name: string;

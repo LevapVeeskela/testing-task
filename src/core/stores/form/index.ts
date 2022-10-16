@@ -1,4 +1,4 @@
-import { makeAutoObservable, autorun } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { FIELDS_DATA, FIRST_NAME, SECOND_NAME } from '../../constants';
 import { Field, FieldError, FieldValue } from '../../models/form';
 import { CommonStore } from '../common';
@@ -19,20 +19,23 @@ export class FormStore {
 		this.fieldErrors = [];
 		this.isLoading = this.isDisabled = true;
 		this.commonStore = commonStore;
-		autorun(() => {
-			this.fields.forEach((field, index) => {
-				const fieldValue = sessionStorage.getItem(field.name);
-				if (fieldValue) {
-					this.fields[index].defaultValue = fieldValue;
-					this.fieldValues.push({ name: field.name, value: fieldValue });
-				}
-			});
-			this.isDisabled = this.fields.length != this.fieldValues.length;
-		});
+		this.setDefaultValues();
 	}
 
-	setFields({ value, name }: FieldValue): void {
+	setDefaultValues = () => {
+		this.fields.forEach((field, index) => {
+			const fieldValue = sessionStorage.getItem(field.name);
+			if (fieldValue) {
+				this.fields[index].defaultValue = fieldValue;
+				this.fieldValues.push({ value: fieldValue, name: field.name });
+			}
+		});
+		this.isDisabled = this.fields.length != this.fieldValues.length;
+	}
+
+	setField({ value, name }: FieldValue): void {
 		const fieldValueOldIndex = this.fieldValues.findIndex((f) => f.name === name);
+
 		if (name && !value && fieldValueOldIndex != -1) {
 			this.fieldValues.splice(fieldValueOldIndex, 1);
 			return;
@@ -51,6 +54,10 @@ export class FormStore {
 		this.fieldErrors = fieldErrors;
 	}
 
+	removeFieldErrorByIndex(index: number): void {
+		this.fieldErrors.splice(index, 1);
+	}
+
 	setIsDisabled(isDisabled: boolean): void {
 		this.isDisabled = isDisabled;
 	}
@@ -64,6 +71,8 @@ export class FormStore {
 		}
 		this.fieldValues.forEach((f) => sessionStorage.removeItem(f.name));
 		this.fieldValues = [];
+		this.setFieldErrors([]);
+		this.setIsDisabled(true);
 	}
 	// #endregion
 }

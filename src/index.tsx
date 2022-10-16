@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './pages';
-import reportWebVitals from './reportWebVitals';
 import './layout/global.scss'
 import './core/i18n';
 
@@ -13,5 +12,3 @@ root.render(
 		<App />
 	</React.StrictMode>
 );
-
-reportWebVitals();
